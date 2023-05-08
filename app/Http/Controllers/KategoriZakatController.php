@@ -61,9 +61,19 @@ class KategoriZakatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, KategoriZakat $kategoriZakat)
+    public function update(Request $request, $id)
     {
-        //
+        $data = new KategoriZakat();
+        $data->nama_zakat = $request->nama;
+        $data->jenis_zakat = $request->jenis;
+        $data->persentase = $request->persentase;
+        $data->keterangan = $request->keterangan;
+        $data->update();
+        if ($data) {
+            return redirect()->route('zakat.index');
+        } else {
+            return back()->withInput();
+        }
     }
 
     /**
