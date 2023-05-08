@@ -21,7 +21,7 @@ class KategoriZakatController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.kategori.add');
     }
 
     /**
@@ -29,13 +29,22 @@ class KategoriZakatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = KategoriZakat::create([
+            'nama_zakat' => $request->nama,
+            'jenis_zakat' => $request->jenis,
+            'persentase' => $request->persen,
+            'keterangan' => $request->keterangan,
+        ]);
+
+        if ($data) {
+            return redirect()->route('zakat.index');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(KategoriZakat $kategoriZakat)
+    public function show($id)
     {
         //
     }
@@ -43,9 +52,10 @@ class KategoriZakatController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KategoriZakat $kategoriZakat)
+    public function edit($id)
     {
-        //
+        $data = KategoriZakat::findOrFail($id);
+        return view('pages.kategori.edit', compact('data'));
     }
 
     /**

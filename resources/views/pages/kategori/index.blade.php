@@ -55,8 +55,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a class="btn btn-info btn-sm">Keterangan</a>
-                                                        <a class="btn btn-warning btn-sm">Ganti</a>
+                                                        <a class="btn btn-info btn-sm" data-toggle="modal">Keterangan</a>
+                                                        <a href="{{ route('zakat.edit', $item->id) }}"
+                                                            class="btn btn-warning btn-sm">Ganti</a>
                                                         <a class="btn btn-danger btn-sm">Hapus</a>
                                                     </div>
                                                 </td>

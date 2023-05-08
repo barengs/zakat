@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KategoriZakat;
 use Illuminate\Http\Request;
 
 class HitungZakatController extends Controller
@@ -11,7 +12,8 @@ class HitungZakatController extends Controller
      */
     public function index()
     {
-        return view('pages.hitungzakat.index');
+        $data = KategoriZakat::all();
+        return view('pages.hitungzakat.index', compact('data'));
     }
 
     /**

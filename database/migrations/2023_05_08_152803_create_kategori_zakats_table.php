@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('persentase');
             $table->text('keterangan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

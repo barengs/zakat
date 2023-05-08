@@ -22,3 +22,6 @@ Route::get('/', function () {
 Route::get('/zakat/hitung', [HitungZakatController::class, 'index'])->name('hitung.zakat');
 Route::get('/zakat', [KategoriZakatController::class, 'index'])->name('zakat.index');
 Route::get('/zakat/tambah', [KategoriZakatController::class, 'create'])->name('zakat.tambah');
+Route::post('/zakat/store', [KategoriZakatController::class, 'store'])->name('zakat.store');
+Route::get('/zakat/edit/{id}', [KategoriZakatController::class, 'edit'])->name('zakat.edit');
+Route::put('/zakat/edit/{id}', [KategoriZakatController::class, 'update'])->name('zakat.update');
