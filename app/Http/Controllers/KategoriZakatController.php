@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KategoriZakat;
+use App\Models\Satuan;
 use Illuminate\Http\Request;
 
 class KategoriZakatController extends Controller
@@ -12,8 +13,14 @@ class KategoriZakatController extends Controller
      */
     public function index()
     {
-        $data = KategoriZakat::all();
+        $data = KategoriZakat::with('satuans')->get();
         return view('pages.kategori.index', compact('data'));
+    }
+
+    public function allinone()
+    {
+        $data = KategoriZakat::with('satuans')->get();
+        return view('pages.post.index', compact('data'));
     }
 
     /**
@@ -21,7 +28,8 @@ class KategoriZakatController extends Controller
      */
     public function create()
     {
-        return view('pages.kategori.add');
+        $data = Satuan::all();
+        return view('pages.kategori.add', compact('data'));
     }
 
     /**
@@ -54,7 +62,7 @@ class KategoriZakatController extends Controller
      */
     public function edit($id)
     {
-        $data = KategoriZakat::findOrFail($id);
+        $data = KategoriZakat::where('id', $id)->with('satuans')->first();
         return view('pages.kategori.edit', compact('data'));
     }
 
@@ -79,8 +87,13 @@ class KategoriZakatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KategoriZakat $kategoriZakat)
+    public function destroy($id)
     {
-        //
+        KategoriZakat::where('id', $id)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil di hapus!'
+        ]);
     }
 }

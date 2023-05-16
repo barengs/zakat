@@ -16,4 +16,9 @@ class KategoriZakat extends Model
         'persentase',
         'keterangan',
     ];
+
+    public function satuans()
+    {
+        return $this->belongsToMany(Satuan::class, 'satuan_zakats')->as('satuans');
+    }
 }

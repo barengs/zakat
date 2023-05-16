@@ -7,12 +7,12 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Jenis Zakat</small></h1>
+                        <h1 class="m-0">Satuan Zakat</small></h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active">Zakat</li>
+                            <li class="breadcrumb-item active">Satuan</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -27,9 +27,9 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Jenis-Jenis Zakat</h3>
+                                <h3 class="card-title">Satuan Zakat</h3>
                                 <div class="card-tools">
-                                    <a href="{{ route('zakat.tambah') }}" class="btn btn-primary btn-sm">Tambah</a>
+                                    <a href="{{ route('satuan.create') }}" class="btn btn-primary btn-sm">Tambah</a>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -38,10 +38,8 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">#</th>
-                                            <th>Zakat</th>
-                                            <th>Jenis Zakat</th>
-                                            <th style="width: 40px">Persentase</th>
-                                            <th>Satuan Zakat</th>ß
+                                            <th>Nama</th>
+                                            <th>Satuan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -49,20 +47,15 @@
                                         @foreach ($data as $item)
                                             <tr id="index-{{ $item->id }}">
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->nama_zakat }}</td>
-                                                <td>{{ $item->jenis_zakat }}</td>
-                                                <td class="text-center">
-                                                    {{ $item->persentase }}%
-                                                </td>
-                                                <td>{{ $item->satuans ? $item->satuans : '-' }}</td>
+                                                <td>{{ $item->nama }}</td>
+                                                <td>{{ $item->satuan }}</td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a class="btn btn-info btn-sm" data-toggle="modal">Detil</a>
-                                                        <a href="{{ route('zakat.edit', $item->id) }}"
+                                                        <a href="{{ route('satuan.edit', $item->id) }}"
                                                             class="btn btn-warning btn-sm">Ganti</a>
                                                         <a href="javascript:void(0)"
-                                                            data-url="{{ route('zakat.delete', $item->id) }}" id="delete"
-                                                            data-id="{{ $item->id }}"
+                                                            data-url="{{ route('satuan.destroy', $item->id) }}"
+                                                            id="delete" data-id="{{ $item->id }}"
                                                             class="btn btn-danger btn-sm">Hapus</a>
                                                     </div>
                                                 </td>

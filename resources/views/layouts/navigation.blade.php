@@ -20,8 +20,21 @@
                 <li class="nav-item {{ Request::is('zakat/hitung') ? 'active' : '' }}">
                     <a href="/zakat/hitung" class="nav-link">Hitung Zakat</a>
                 </li>
-                <li class="nav-item {{ Request::is('zakat') ? 'active' : '' }}">
-                    <a href="/zakat" class="nav-link">Info Zakat</a>
+                <li class="nav-item {{ Request::is('zakat-info') ? 'active' : '' }}">
+                    <a href="/zakat-info" class="nav-link">Info Zakat</a>
+                </li>
+                <li class="nav-item dropdown {{ Request::is('zakat', 'zakat/*', 'satuan') ? 'active' : '' }}">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" class="nav-link dropdown-toggle">Data</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow"
+                        style="left: 0px; right: inherit;">
+                        <li><a href="/zakat" class="dropdown-item {{ Request::is('zakat') ? 'active' : '' }}">Zakat</a>
+                        </li>
+                        <li><a href="/satuan" class="dropdown-item">Satuan Zakat</a></li>
+
+                        <li class="dropdown-divider"></li>
+                        <li><a href="/berita" class="dropdown-item">Berita Zakat</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

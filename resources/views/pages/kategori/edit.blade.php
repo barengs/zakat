@@ -64,6 +64,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label for="jenis" class="col-sm-2 col-form-label">Satuan Zakat</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <select name="jenis" class="form-control select2bs4" style="width: 100%;"
+                                                    multiple>
+                                                    @foreach ($data->satuans as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label for="persen" class="col-sm-2 col-form-label">Persentase</label>
                                         <div class="col-sm-10">
                                             <input name="persen" value="{{ $data->persentase }}" type="number"

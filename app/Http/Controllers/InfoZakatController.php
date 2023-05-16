@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KategoriZakat;
 use Illuminate\Http\Request;
+use App\Models\KategoriZakat;
 
-class HitungZakatController extends Controller
+class InfoZakatController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = KategoriZakat::all();
-        return view('pages.hitungzakat.index', compact('data'));
+        $data = KategoriZakat::with('satuans')->get();
+        return view('pages.post.index', compact('data'));
     }
 
     /**
@@ -35,10 +35,9 @@ class HitungZakatController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id)
     {
-        $data = KategoriZakat::find($id);
-        return response()->json(['data' => $data]);
+        //
     }
 
     /**
