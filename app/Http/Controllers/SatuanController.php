@@ -72,8 +72,12 @@ class SatuanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Satuan $satuan)
+    public function destroy($id)
     {
-        //
+        Satuan::where('id', $id)->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil di hapus!',
+        ]);
     }
 }
