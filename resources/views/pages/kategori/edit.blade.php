@@ -64,14 +64,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="jenis" class="col-sm-2 col-form-label">Satuan Zakat</label>
+                                        <label for="satuan" class="col-sm-2 col-form-label">Satuan Zakat</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
-                                                <select name="jenis" class="form-control select2bs4" style="width: 100%;"
-                                                    multiple>
-                                                    @foreach ($data->satuans as $item)
-                                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                                    @endforeach
+                                                <select name="satuan" class="form-control select2bs4" style="width: 100%;">
+                                                    @if ($data->satuan)
+                                                        @foreach ($satuan as $item)
+                                                            <option value="{{ $item->id }}"
+                                                                @selected($data->satuan->id == $item->id)>
+                                                                {{ $item->nama }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($satuan as $item)
+                                                            <option value="{{ $item->id }}">
+                                                                {{ $item->nama }}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
@@ -82,6 +90,13 @@
                                             <input name="persen" value="{{ $data->persentase }}" type="number"
                                                 class="form-control" id="persen"
                                                 placeholder="Tulis angka persentase zakat">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="minimal" class="col-sm-2 col-form-label">Nishab</label>
+                                        <div class="col-sm-10">
+                                            <input name="minimal" value="{{ $data->minimal }}" type="number"
+                                                class="form-control" id="minimal" placeholder="Tulis angka nishab zakat">
                                         </div>
                                     </div>
                                     <div class="form-group row">

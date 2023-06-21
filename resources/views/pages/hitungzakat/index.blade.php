@@ -42,6 +42,8 @@
                                                     <th>Kategori Zakat</th>
                                                     <th>Jenis Zakat</th>
                                                     <th style="width: 40px">Persentase</th>
+                                                    <th>Nishab (Wajib Zakat)</th>
+                                                    <th style="width: 40px">Satuan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -62,6 +64,12 @@
                                                         <td>
                                                             {{ $item->persentase }}%
                                                         </td>
+                                                        <td>
+                                                            {{ $item->minimal }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $item->satuan ? $item->satuan->nama : '' }}
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -70,16 +78,17 @@
                                 </div>
                                 <div class="form-group row">
                                     <input type="hidden" name="persen" id="persen">
+                                    <input type="hidden" name="minimal" id="minimal">
                                     <label for="nominal" class="col-sm-2 col-form-label">Nominal Zakat</label>
                                     <div class="col-sm-6">
-                                        <input name="nominal" type="text" class="form-control" id="nominal"
+                                        <input name="nominal" type="number" class="form-control" id="nominal"
                                             placeholder="Masukan jumlah zakat">
                                     </div>
-                                    <label for="satuan" class="col-sm-1 col-form-label text-right">Satuan</label>
+                                    {{-- <label for="satuan" class="col-sm-1 col-form-label text-right">Satuan</label>
                                     <div class="col-sm-2">
                                         <input name="satuan" type="text" class="form-control" id="satuan"
                                             placeholder="Pilih">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="form-group row">
                                     <label for="hasil" class="col-sm-2 col-form-label">Jumlah Zakat</label>
@@ -105,8 +114,13 @@
     </div>
 @endsection
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
+@endpush
+
 @push('js')
-    <script style="text/javascript">
+    <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script>
         $(function() {
             $('.select2').select2()
 
@@ -119,12 +133,14 @@
                 var id = $(this).data('id');
                 var URL = $(this).data('url');
                 document.getElementById("nominal").value = "";
+                document.getElementById("hasil").value = "";
                 $.ajax({
                     url: URL,
                     type: 'GET',
                     dataType: 'json',
                     success: function(res) {
                         document.getElementById("persen").value = res.data.persentase;
+                        document.getElementById("minimal").value = res.data.minimal;
                     }
                 })
             })
@@ -165,8 +181,21 @@
         function hitung() {
             let persen = document.getElementById("persen").value;
             let nominal = document.getElementById("nominal").value;
-            let hasil = nominal * persen / 100
-            document.getElementById("hasil").value = formatNumber(hasil);
+            let minimal = document.getElementById("minimal").value;
+            if (+nominal < +minimal) {
+                // console.log(typeof(nominal));
+                Swal.fire({
+                    title: 'Perhatian!',
+                    text: 'Nilai harta belum memenuhi pengeluaran zakat!!!',
+                    icon: 'warning',
+                    // showCancelButton: true,
+                    // cancelButtonText: 'TIDAK',
+                    confirmButtonText: 'Mengerti!'
+                })
+            } else {
+                let hasil = nominal * persen / 100
+                document.getElementById("hasil").value = formatNumber(hasil);
+            }
         }
     </script>
 @endpush

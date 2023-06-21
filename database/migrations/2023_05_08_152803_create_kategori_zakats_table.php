@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nama_zakat');
             $table->enum('jenis_zakat', ['langsung', 'tidak langsung']);
             $table->float('persentase');
+            $table->decimal('minimal', 8, 2)->nullable();
+            $table->unsignedBigInteger('satuan_id')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -15,10 +15,17 @@ class KategoriZakat extends Model
         'jenis_zakat',
         'persentase',
         'keterangan',
+        'minimal',
+        'satuan_id',
     ];
 
-    public function satuans()
+    public function satuan()
     {
-        return $this->belongsToMany(Satuan::class, 'satuan_zakats')->as('satuans');
+        return $this->belongsTo(Satuan::class);
     }
+
+    // public function satuans()
+    // {
+    //     return $this->belongsToMany(Satuan::class, 'satuan_zakats', 'satuan_id', 'kategori_zakat_id')->as('satuans');
+    // }
 }

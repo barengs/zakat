@@ -41,7 +41,8 @@
                                             <th>Zakat</th>
                                             <th>Jenis Zakat</th>
                                             <th style="width: 40px">Persentase</th>
-                                            <th>Satuan Zakat</th>ß
+                                            <th>Nishab</th>
+                                            <th style="width: 40px">Satuan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -54,7 +55,12 @@
                                                 <td class="text-center">
                                                     {{ $item->persentase }}%
                                                 </td>
-                                                <td>{{ $item->satuans ? $item->satuans : '-' }}</td>
+                                                <td>
+                                                    {{ $item->minimal }}
+                                                </td>
+                                                <td>
+                                                    {{ $item->satuan ? $item->satuan->nama : '-' }}
+                                                </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <a class="btn btn-info btn-sm" data-toggle="modal">Detil</a>

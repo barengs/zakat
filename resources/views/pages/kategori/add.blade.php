@@ -55,11 +55,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="jenis" class="col-sm-2 col-form-label">Satuan Zakat</label>
+                                        <label for="satuan" class="col-sm-2 col-form-label">Satuan Zakat</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
-                                                <select name="jenis" class="form-control select2bs4" style="width: 100%;"
-                                                    multiple>
+                                                <select name="satuan" class="form-control select2bs4" style="width: 100%;">
                                                     @foreach ($data as $item)
                                                         <option value="{{ $item->id }}">{{ $item->satuan }}</option>
                                                     @endforeach
@@ -72,6 +71,13 @@
                                         <div class="col-sm-10">
                                             <input name="persen" value="2.5" type="number" class="form-control"
                                                 id="persen" placeholder="Tulis angka persentase zakat">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="minimal" class="col-sm-2 col-form-label">Nishab</label>
+                                        <div class="col-sm-10">
+                                            <input name="minimal" type="number" class="form-control" id="minimal"
+                                                placeholder="Tulis angka nishab zakat">
                                         </div>
                                     </div>
                                     <div class="form-group row">

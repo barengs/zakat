@@ -13,14 +13,8 @@ class KategoriZakatController extends Controller
      */
     public function index()
     {
-        $data = KategoriZakat::with('satuans')->get();
+        $data = KategoriZakat::with('satuan')->get();
         return view('pages.kategori.index', compact('data'));
-    }
-
-    public function allinone()
-    {
-        $data = KategoriZakat::with('satuans')->get();
-        return view('pages.post.index', compact('data'));
     }
 
     /**
@@ -42,7 +36,13 @@ class KategoriZakatController extends Controller
             'jenis_zakat' => $request->jenis,
             'persentase' => $request->persen,
             'keterangan' => $request->keterangan,
+            'minimal' => $request->minimal,
+            'satuan_id' => $request->satuan,
         ]);
+
+        // if ($request->has('satuan')) {
+        //     $data->satuans()->attach($request->satuan);
+        // }
 
         if ($data) {
             return redirect()->route('zakat.index');
@@ -62,8 +62,9 @@ class KategoriZakatController extends Controller
      */
     public function edit($id)
     {
-        $data = KategoriZakat::where('id', $id)->with('satuans')->first();
-        return view('pages.kategori.edit', compact('data'));
+        $data = KategoriZakat::where('id', $id)->with('satuan')->first();
+        $satuan = Satuan::all();
+        return view('pages.kategori.edit', compact(['data', 'satuan']));
     }
 
     /**
@@ -71,12 +72,19 @@ class KategoriZakatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = new KategoriZakat();
+        $data = KategoriZakat::findOrFail($id);
         $data->nama_zakat = $request->nama;
         $data->jenis_zakat = $request->jenis;
-        $data->persentase = $request->persentase;
+        $data->persentase = $request->persen;
         $data->keterangan = $request->keterangan;
+        $data->minimal = $request->minimal;
+        $data->satuan_id = $request->satuan;
         $data->update();
+
+        // if ($request->has('satuan')) {
+        //     $data->satuans()->sync($request->satuan);
+        // }
+
         if ($data) {
             return redirect()->route('zakat.index');
         } else {

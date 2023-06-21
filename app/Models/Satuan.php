@@ -12,8 +12,13 @@ class Satuan extends Model
 
     protected $fillable = ['nama', 'satuan'];
 
-    public function zakats()
+    public function zakat()
     {
-        return $this->belongsToMany(KategoriZakat::class, 'satuan_zakats')->as('zakats');
+        return $this->hasOne(KategoriZakat::class);
     }
+
+    // public function zakats()
+    // {
+    //     return $this->belongsToMany(KategoriZakat::class, 'satuan_zakats', 'kategori_zakat_id', 'satuan_id')->as('zakats');
+    // }
 }

@@ -12,7 +12,7 @@ class InfoZakatController extends Controller
      */
     public function index()
     {
-        $data = KategoriZakat::with('satuans')->get();
+        $data = KategoriZakat::with('satuan')->get();
         return view('pages.post.index', compact('data'));
     }
 
